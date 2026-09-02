@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" role="img" aria-label="Nusa">
+  <rect width="16" height="16" rx="3" fill="#F4EFE6"/>
+  <circle cx="8" cy="9" r="5" fill="none" stroke="#1F5C48" stroke-width="2"/>
+  <path fill="#1F5C48" d="M10 1.4c2.7 1.1 3.5 4.8 1.4 7.1-.5-2.5-1.7-4.3-3.2-5.5-.5-.4 0-1.4 1.8-1.6z"/>
+</svg>

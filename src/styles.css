@@ -1,0 +1,164 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-background: #f3eee4;
+  --color-foreground: #1c1915;
+  --color-card: #fbf7f0;
+  --color-card-ink: #1c1915;
+  --color-primary: #1f5c48;
+  --color-primary-foreground: #f4efe6;
+  --color-secondary: #efe8dc;
+  --color-secondary-foreground: #1c1915;
+  --color-muted: #efe8dc;
+  --color-muted-foreground: #6f675c;
+  --color-subtle: #8a8176;
+  --color-benefit: #2a6b4a;
+  --color-benefit-fg: #143528;
+  --color-benefit-bg: #e4efe8;
+  --color-caution: #9a4a32;
+  --color-caution-fg: #4a1f16;
+  --color-caution-bg: #f6e8e3;
+  --color-border: color-mix(in oklab, var(--color-foreground) 10%, transparent);
+  --color-ring: #1f5c48;
+  --color-overlay: color-mix(in oklab, var(--color-foreground) 46%, transparent);
+
+  --font-sans: "Outfit", "Noto Sans Thai", "Noto Sans Khmer", "Noto Sans Lao",
+    "Noto Sans Myanmar", "Noto Sans SC", "Noto Sans", ui-sans-serif, system-ui,
+    sans-serif;
+  --font-display: "Fraunces", "Noto Serif", ui-serif, Georgia, serif;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+
+  --shadow-border:
+    0px 0px 0px 1px color-mix(in oklab, var(--color-foreground) 6%, transparent),
+    0px 1px 2px -1px color-mix(in oklab, var(--color-foreground) 6%, transparent),
+    0px 2px 4px 0px color-mix(in oklab, var(--color-foreground) 4%, transparent);
+  --shadow-border-hover:
+    0px 0px 0px 1px color-mix(in oklab, var(--color-foreground) 10%, transparent),
+    0px 1px 2px -1px color-mix(in oklab, var(--color-foreground) 8%, transparent),
+    0px 2px 4px 0px color-mix(in oklab, var(--color-foreground) 6%, transparent);
+  --shadow-lift:
+    0px 0px 0px 1px color-mix(in oklab, var(--color-foreground) 6%, transparent),
+    0px 8px 24px -8px color-mix(in oklab, var(--color-foreground) 16%, transparent);
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--color-background);
+    color: var(--color-foreground);
+  }
+
+  body {
+    min-height: 100dvh;
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  img {
+    outline: 1px solid color-mix(in oklab, var(--color-foreground) 10%, transparent);
+    outline-offset: -1px;
+  }
+
+  :lang(th),
+  :lang(km),
+  :lang(lo),
+  :lang(my) {
+    line-height: 1.7;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-primary) 22%, transparent);
+    color: var(--color-foreground);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes nusa-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes nusa-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.nusa-rise {
+  animation: nusa-rise 400ms var(--ease-smooth-out) both;
+}
+
+.nusa-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-muted-foreground) 0%,
+    var(--color-foreground) 45%,
+    var(--color-muted-foreground) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: nusa-shimmer 1.6s linear infinite;
+}
+
+.nusa-plate {
+  background:
+    radial-gradient(circle at 50% 46%, #fffdf8 0%, #f4eee4 54%, #e7dccb 100%);
+  box-shadow:
+    inset 0 0 0 10px color-mix(in oklab, var(--color-foreground) 4%, transparent),
+    inset 0 0 0 11px color-mix(in oklab, #fff 55%, transparent),
+    var(--shadow-border);
+}
