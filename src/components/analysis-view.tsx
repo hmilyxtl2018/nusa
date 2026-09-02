@@ -372,9 +372,15 @@ export function AnalysisView({
             {t(lang, "result.beneficial")}
           </h2>
           <div className="mt-3 space-y-2">
-            {analysis.beneficial.map((item) => (
-              <BenefitCard key={item.component} item={item} lang={lang} />
-            ))}
+            {analysis.beneficial.length === 0 ? (
+              <p className="rounded-[20px] bg-card px-4 py-3.5 text-sm leading-relaxed text-muted-foreground shadow-[var(--shadow-border)]">
+                {analysis.summary || t(lang, "result.beneficial")}
+              </p>
+            ) : (
+              analysis.beneficial.map((item) => (
+                <BenefitCard key={item.component} item={item} lang={lang} />
+              ))
+            )}
           </div>
         </section>
 
@@ -383,15 +389,21 @@ export function AnalysisView({
             {t(lang, "result.cautions")}
           </h2>
           <div className="mt-3 space-y-2">
-            {analysis.cautions.map((item) => (
-              <CautionCard
-                key={item.component}
-                item={item}
-                lang={lang}
-                personal={cautionIsPersonal(item, profile)}
-                personalLabel={t(lang, "result.foryou")}
-              />
-            ))}
+            {analysis.cautions.length === 0 ? (
+              <p className="rounded-[20px] bg-card px-4 py-3.5 text-sm leading-relaxed text-muted-foreground shadow-[var(--shadow-border)]">
+                {t(lang, "result.cautions")}
+              </p>
+            ) : (
+              analysis.cautions.map((item) => (
+                <CautionCard
+                  key={item.component}
+                  item={item}
+                  lang={lang}
+                  personal={cautionIsPersonal(item, profile)}
+                  personalLabel={t(lang, "result.foryou")}
+                />
+              ))
+            )}
           </div>
         </section>
 

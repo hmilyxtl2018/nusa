@@ -11,6 +11,7 @@ import { compressImage, makeThumb, urlToDataUrl } from "@/lib/image";
 import { savePhoto } from "@/lib/photo-db";
 import { SAMPLE_PLATES } from "@/lib/samples";
 import { useNusa } from "@/lib/store";
+import { rememberScan } from "@/lib/last-scan";
 import type { Lang } from "@/lib/types";
 import { uid } from "@/lib/utils";
 
@@ -78,18 +79,20 @@ export function HomeView() {
       const id = uid();
       const thumb = await makeThumb(draft.dataUrl);
       if (!draft.sampleSrc) await savePhoto(id, draft.dataUrl);
-      addScan({
+      const record = {
         id,
         createdAt: Date.now(),
         sampleSrc: draft.sampleSrc,
         thumb,
         analysis: result.analysis,
         chat: [],
-      });
+      };
+      rememberScan(record, draft.dataUrl);
+      addScan(record);
+      await navigate({ to: "/scan/$id", params: { id } });
       setDraft(null);
       setNote("");
       setBusy(false);
-      await navigate({ to: "/scan/$id", params: { id } });
     } catch {
       setError("fail");
       setBusy(false);

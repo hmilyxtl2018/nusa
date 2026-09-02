@@ -34,7 +34,7 @@ export function YouView() {
               type="button"
               onClick={() => setLang(item.id)}
               className={cn(
-                "min-h-10 rounded-full px-3.5 text-sm font-medium shadow-[var(--shadow-border)]",
+                "relative z-10 min-h-11 rounded-full px-3.5 text-sm font-medium shadow-[var(--shadow-border)]",
                 lang === item.id
                   ? "bg-primary text-primary-foreground"
                   : "bg-card text-foreground",

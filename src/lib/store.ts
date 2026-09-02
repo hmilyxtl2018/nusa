@@ -81,10 +81,29 @@ export const useNusa = create<NusaState>()(
         profile: s.profile,
         scans: s.scans.map((scan) => ({
           ...scan,
-          // Keep thumbs; full photos live in IndexedDB.
           chat: scan.chat.slice(-12),
         })),
       }),
+      merge: (persisted, current) => {
+        const p = (persisted ?? {}) as Partial<NusaState>;
+        const byId = new Map(
+          (p.scans ?? []).map((scan) => [scan.id, scan] as const),
+        );
+        for (const scan of current.scans) byId.set(scan.id, scan);
+        return {
+          ...current,
+          ...p,
+          lang: current.lang ?? p.lang ?? null,
+          onboarded: current.onboarded || Boolean(p.onboarded),
+          profile: current.profile ?? p.profile ?? DEFAULT_PROFILE,
+          scans: [...byId.values()]
+            .sort((a, b) => b.createdAt - a.createdAt)
+            .slice(0, 24),
+        };
+      },
+      onRehydrateStorage: () => () => {
+        useNusa.setState({ hydrated: true });
+      },
     },
   ),
 );
