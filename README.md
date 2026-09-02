@@ -30,6 +30,28 @@ npm run typecheck
 npm run build
 ```
 
+## Deploy (Vercel)
+
+Nusa is a TanStack Start app with server functions (`analyzePlate`, `askAboutPlate`). It cannot live on GitHub Pages. The build already uses Nitro’s Vercel preset.
+
+**Do not keep running from the Grok preview.** Import the repo once:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/hmilyxtl2018/nusa&env=XAI_API_KEY,VITE_AUTH_ENABLED&envDescription=XAI_API_KEY%20from%20console.x.ai.%20Set%20VITE_AUTH_ENABLED=false.&project-name=nusa&repository-name=nusa)
+
+Or in the Vercel dashboard: **Add New → Project → Import** [`hmilyxtl2018/nusa`](https://github.com/hmilyxtl2018/nusa).
+
+| Env | Value | Notes |
+|---|---|---|
+| `XAI_API_KEY` | `xai-…` | Server only. From [console.x.ai](https://console.x.ai). |
+| `VITE_AUTH_ENABLED` | `false` | Required. If unset, the build turns sign-in **on**. |
+| `DATABASE_URL` | *(omit)* | Leave empty. Auth is off; no Postgres needed. |
+
+After the first deploy you get `https://nusa-….vercel.app`. Attach a custom domain under **Settings → Domains** (buy the name at Cloudflare or your registrar; point DNS to Vercel).
+
+Hobby is enough to start. Read-plate calls can take 15–40s; the function timeout is set to 60s. Cap spend in the xAI console — every public visitor uses this key.
+
+Cloudflare Workers is a later move (change Nitro `preset` and re-test vision body size). Do not start there.
+
 ## Promo
 
 A 9:16 mobile film lives at [`docs/nusa-promo-mobile.mp4`](docs/nusa-promo-mobile.mp4) — photograph the meal, read both sides of the plate.
