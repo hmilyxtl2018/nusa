@@ -30,6 +30,6 @@ npm run typecheck
 npm run build
 ```
 
-## License
+## Promo
 
-Private project unless you add a license.
+A 9:16 mobile film lives at [`docs/nusa-promo-mobile.mp4`](docs/nusa-promo-mobile.mp4) — photograph the meal, read both sides of the plate.
