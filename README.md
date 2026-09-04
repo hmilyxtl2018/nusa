@@ -25,6 +25,17 @@ npm run dev
 
 The app expects `XAI_API_KEY` on the server for analysis. Photos are compressed on the client before they are sent.
 
+Plate analysis runs in **two phases** (identity + deep nutrition/culture), validated with Zod and one repair retry. Optional server env knobs (see `.env.example`):
+
+| Env | Default | Notes |
+|---|---|---|
+| `NUSA_VISION_DETAIL_PASS_A` | `auto` | Vision `detail` for fast identity pass |
+| `NUSA_VISION_DETAIL_PASS_B` | `high` | Vision `detail` for deep pass |
+| `NUSA_MODEL_PASS_A` | `grok-4.5` | Model for Pass A (falls back to `NUSA_MODEL_FALLBACK`) |
+| `NUSA_MODEL_PASS_B` | `grok-4.5` | Model for Pass B |
+| `NUSA_MODEL_ASK` | `grok-4.5` | Text-only follow-up (`askAboutPlate`, no image) |
+| `NUSA_MODEL_FALLBACK` | `grok-4.6` | Used when primary returns 400/404 |
+
 ```bash
 npm run typecheck
 npm run build
